@@ -60,7 +60,6 @@ module.exports = function crc16 (input) {
 	;
 
 	l = input.length;
-
 	for ( i=0; i<l; i++ ) {
 		crc ^= input[i].charCodeAt(0); // ord()
 		crc = (crc >> 8) ^ crcTable[crc & 255];
@@ -68,6 +67,9 @@ module.exports = function crc16 (input) {
 
 	// Decimal 2 Hex, then uppercase
 	var res = crc.toString(16).toUpperCase();
-
+	
+	while ( res.length < 4 ) {
+		res = '0' + res;
+	}
 	return res[2] + res[3] + res[0] + res[1];
 }
